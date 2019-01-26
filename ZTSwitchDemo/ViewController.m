@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ZTSwitch.h"
 
 @interface ViewController ()
 
@@ -14,10 +15,44 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    ZTSwitch *sw = [[ZTSwitch alloc] init]; // 控件的显示与设置的宽高无关
+    [[self view] addSubview:sw];
+    [sw setFrame:CGRectMake(100, 100, 51, 31)];
+    [sw addBlock:^(ZTSwitch *sw, ZTSwitchCompletionHandler completionHandler) {
+        [self changeState:sw completionHandler:completionHandler];
+    }];
+    
+    return;
 }
 
+- (void)changeState:(ZTSwitch *)sw completionHandler:(ZTSwitchCompletionHandler)completionHandler
+{
+    BOOL isOn = ![sw isOn];
+    
+    int i = arc4random() % 2;
+    if (i == 1)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSLog(@"模拟异步回调");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // 模拟异步回调
+                [sw setOn:isOn animated:YES];
+                completionHandler();
+            });
+        });
+    }
+    else
+    {
+        // 模拟条件不达成，不设置开关状态
+        NSLog(@"模拟条件不达成，不设置开关状态");
+        completionHandler();
+    }
+    
+    return;
+}
 
 @end

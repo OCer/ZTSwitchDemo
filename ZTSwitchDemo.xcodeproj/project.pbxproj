@@ -13,6 +13,7 @@
 		C6C6A16921FC2AB200A02ECD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6C6A16821FC2AB200A02ECD /* Assets.xcassets */; };
 		C6C6A16C21FC2AB200A02ECD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C6A16A21FC2AB200A02ECD /* LaunchScreen.storyboard */; };
 		C6C6A16F21FC2AB200A02ECD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C6A16E21FC2AB200A02ECD /* main.m */; };
+		C6C6A17721FC2ACC00A02ECD /* ZTSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C6A17621FC2ACC00A02ECD /* ZTSwitch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		C6C6A16B21FC2AB200A02ECD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C6C6A16D21FC2AB200A02ECD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6C6A16E21FC2AB200A02ECD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C6C6A17521FC2ACC00A02ECD /* ZTSwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTSwitch.h; sourceTree = "<group>"; };
+		C6C6A17621FC2ACC00A02ECD /* ZTSwitch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTSwitch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				C6C6A16221FC2AB000A02ECD /* ViewController.h */,
 				C6C6A16321FC2AB000A02ECD /* ViewController.m */,
 				C6C6A16521FC2AB000A02ECD /* Main.storyboard */,
+				C6C6A17521FC2ACC00A02ECD /* ZTSwitch.h */,
+				C6C6A17621FC2ACC00A02ECD /* ZTSwitch.m */,
 				C6C6A16821FC2AB200A02ECD /* Assets.xcassets */,
 				C6C6A16A21FC2AB200A02ECD /* LaunchScreen.storyboard */,
 				C6C6A16D21FC2AB200A02ECD /* Info.plist */,
@@ -142,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6C6A16421FC2AB000A02ECD /* ViewController.m in Sources */,
+				C6C6A17721FC2ACC00A02ECD /* ZTSwitch.m in Sources */,
 				C6C6A16F21FC2AB200A02ECD /* main.m in Sources */,
 				C6C6A16121FC2AB000A02ECD /* AppDelegate.m in Sources */,
 			);
