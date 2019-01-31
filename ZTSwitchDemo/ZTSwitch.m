@@ -94,4 +94,9 @@
     return;
 }
 
++ (BOOL)accessInstanceVariablesDirectly
+{
+    return NO;
+}
+
 @end
