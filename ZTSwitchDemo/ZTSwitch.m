@@ -11,6 +11,7 @@
 @interface ZTSwitch ()
 
 @property(nonatomic, strong) UIView *view;
+@property(nonatomic, strong) UIImpactFeedbackGenerator *feedBackGenertor;
 @property(nonatomic, copy) ZTSwitchBlock block;
 @property(nonatomic, assign, getter=isNeedVibration) BOOL needVibration;
 
@@ -18,22 +19,40 @@
 
 @implementation ZTSwitch
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self create];
+    
+    return;
+}
+
 - (instancetype)init
 {
     if (self = [super init])
     {
-        [self setBackgroundColor:[UIColor clearColor]];
-        
-        UIView *view = [[UIView alloc] init];
-        [view setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:view];
-        [self setView:view];
-        
-        UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeState:)];
-        [view addGestureRecognizer:gestureRecognizer];
+        [self create];
     }
     
     return self;
+}
+
+- (void)create
+{
+    [self setBackgroundColor:[UIColor clearColor]];
+    
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor clearColor]];
+    [self addSubview:view];
+    [self setView:view];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeState:)];
+    [view addGestureRecognizer:gestureRecognizer];
+    
+    UIImpactFeedbackGenerator *feedBackGenertor = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy];
+    [self setFeedBackGenertor:feedBackGenertor];
+    
+    return;
 }
 
 - (void)layoutSubviews
@@ -73,7 +92,13 @@
     {
         [self setNeedVibration:YES];
         __weak typeof(self) weakSelf = self;
-        block(self, ^() {
+        block(self, ^(BOOL isOriginal) {
+            if (isOriginal == NO)
+            {
+                BOOL isOn = ![weakSelf isOn];
+                [weakSelf setOn:isOn animated:YES];
+            }
+            
             [weakSelf setNeedVibration:NO];
         });
     }
@@ -85,9 +110,8 @@
 {
     if ([self isNeedVibration])
     {
-        UIImpactFeedbackGenerator *feedBackGenertor = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
-        [feedBackGenertor prepare];
-        [feedBackGenertor impactOccurred];
+        [[self feedBackGenertor] prepare];
+        [[self feedBackGenertor] impactOccurred];
         [self setNeedVibration:NO];
     }
     

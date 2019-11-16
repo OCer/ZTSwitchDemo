@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class ZTSwitch;
 
-typedef void (^ZTSwitchCompletionHandler)(void);
+typedef void (^ZTSwitchCompletionHandler)(BOOL isOriginal); // isOriginal为YES的时候需要自己手动调用setOn方法设置状态，如果需要自动设置状态，则赋值NO
 typedef void (^ZTSwitchBlock)(ZTSwitch *sw, ZTSwitchCompletionHandler completionHandler);
 
 @interface ZTSwitch : UISwitch
