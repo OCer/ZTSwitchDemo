@@ -31,8 +31,6 @@
 
 - (void)changeState:(ZTSwitch *)sw completionHandler:(ZTSwitchCompletionHandler)completionHandler
 {
-    BOOL isOn = ![sw isOn];
-    
     int i = arc4random() % 2;
     if (i == 1)
     {
@@ -40,8 +38,7 @@
             NSLog(@"模拟异步回调");
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 // 模拟异步回调
-                [sw setOn:isOn animated:YES];
-                completionHandler();
+                completionHandler(NO);
             });
         });
     }
@@ -49,7 +46,7 @@
     {
         // 模拟条件不达成，不设置开关状态
         NSLog(@"模拟条件不达成，不设置开关状态");
-        completionHandler();
+        completionHandler(YES);
     }
     
     return;
